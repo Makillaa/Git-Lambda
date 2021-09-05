@@ -35,11 +35,11 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: us-west-2
         profile_name: default
-        project_name: <your project name>
+        project_name: Git-Lambda
         runtime: python3.7
-        s3_bucket: <your bucket name>
+        s3_bucket: hello-test-makillaa
     
     # Runs a set of commands using the runners shell; THIS DOESN'T WORK
     - name: Run a multi-line script
@@ -65,6 +65,6 @@ jobs:
       uses: appleboy/lambda-action@v0.0.4
       with:
             #name of my AWS Lambda Function
-            function_name: <your function name>
+            function_name: Lambda-ReadS3Buckets
             #contains all the files in my github repository
-            zip_file: <your function name>.zip
+            zip_file: test-dep-dev.zip
