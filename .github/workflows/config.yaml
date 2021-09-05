@@ -35,7 +35,7 @@ jobs:
       with:
         aws-access-key-id: AKIATSFNYMQJROZB4VAQ
         aws-secret-access-key: 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
-        aws-region: us-west-2
+        aws-region: us-east-1
         profile_name: default
         project_name: Git-Lambda
         runtime: python3.7
