@@ -39,7 +39,7 @@ jobs:
         profile_name: default
         project_name: Git-Lambda
         runtime: python3.7
-        s3_bucket: hello-test-makillaa
+        s3_bucket: hello-world-makillaa-us-east-1
     
     # Runs a set of commands using the runners shell; THIS DOESN'T WORK
     - name: Run a multi-line script
@@ -51,6 +51,6 @@ jobs:
       uses: appleboy/lambda-action@v0.0.4
       with:
             #name of my AWS Lambda Function
-            function_name: Lambda-ReadS3Buckets
+            function_name: HelloWorldLambda
             #contains all the files in my github repository
             zip_file: hello.zip
