@@ -31,8 +31,8 @@ def lambda_handler(event=None, context=None):
                                 headers={"Authorization": "Bearer keyW5hCXiZZ7WEJmf"})
         jsonik = json.loads(response.content)
         temporary_list = [i['fields']['title'] for i in jsonik['records']]
-        lc = Pagination(temporary_list)
+        lc = ListCircle(temporary_list)
         return lc.get_visible_items()
     else:
-        lc = Pagination(massif)
+        lc = ListCircle(massif)
         return lc.get_visible_items()
