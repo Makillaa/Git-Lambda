@@ -2,6 +2,7 @@ import json, requests
 
 massif = []
 
+
 class Pagination:
 
     def __init__(self, items=[]):
@@ -23,15 +24,15 @@ class Pagination:
         return display
 
 
-
 def lambda_handler(event=None, context=None):
     global massif, jsonik, temporary_list
     if not massif:
         response = requests.get("https://api.airtable.com/v0/appBULZ298jKOcjoN/MainTable?view=Grid%20view",
                                 headers={"Authorization": "Bearer keyW5hCXiZZ7WEJmf"})
         jsonik = json.loads(response.content)
-        temporary_list = []
-    for i in jsonik['records']:
-        temporary_list.append(i['fields']['title'])
-    p = Pagination(temporary_list)
-    print(p.get_visible_items())
+        temporary_list = [i['fields']['title'] for i in jsonik['records']]
+        p = Pagination(temporary_list)
+        print(p.get_visible_items())
+    else:
+        p = Pagination(massif)
+        print(p.get_visible_items())
