@@ -1,30 +1,37 @@
 import json, requests
 
+massif = []
 
 class Pagination:
 
     def __init__(self, items=[]):
-        self.items = items
+        global massif
+        massif = items
         self.cursor = 0
+        self.run = self.cursor + 3
+
+    def circle(self):
+        a = massif.pop(self.cursor)
+        massif.append(a)
+        if self.cursor >= len(massif) - 1:
+            self.cursor = 0
+        return self
 
     def get_visible_items(self):
-        run = self.cursor+3
-        return self.items[self.cursor:run]
-        a = self.items.pop(self.cursor)
-        self.items.append(a)
-        if self.cursor >= len(self.items)-1:
-            self.cursor = 0
+        display = massif[self.cursor:self.run]
+        self.circle()
+        return display
 
 
-def lambda_handler(event, context):
-    response = requests("GET", "https://api.airtable.com/v0/appBULZ298jKOcjoN/MainTable?view=Grid%20view",
-                            headers={"Authorization": "Bearer keyW5hCXiZZ7WEJmf"})
-    jsonik = json.loads(response.content)
-    print(jsonik)
-    zdarov = []
+
+def lambda_handler(event=None, context=None):
+    global massif, jsonik, temporary_list
+    if not massif:
+        response = requests.get("https://api.airtable.com/v0/appBULZ298jKOcjoN/MainTable?view=Grid%20view",
+                                headers={"Authorization": "Bearer keyW5hCXiZZ7WEJmf"})
+        jsonik = json.loads(response.content)
+        temporary_list = []
     for i in jsonik['records']:
-        zdarov.append(i['fields']['title'])
-    pig = Pagination(zdarov)
-    aim = []
-    for i in range(1):
-        return pig.get_visible_items()
+        temporary_list.append(i['fields']['title'])
+    p = Pagination(temporary_list)
+    print(p.get_visible_items())
