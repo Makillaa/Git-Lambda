@@ -32,7 +32,7 @@ def lambda_handler(event=None, context=None):
         jsonik = json.loads(response.content)
         temporary_list = [i['fields']['title'] for i in jsonik['records']]
         p = Pagination(temporary_list)
-        print(p.get_visible_items())
+        return p.get_visible_items()
     else:
         p = Pagination(massif)
-        print(p.get_visible_items())
+        return p.get_visible_items()
