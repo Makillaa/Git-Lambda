@@ -3,7 +3,7 @@ import json, requests
 massif = []
 
 
-class Pagination:
+class ListCircle:
 
     def __init__(self, items=[]):
         global massif
@@ -31,8 +31,8 @@ def lambda_handler(event=None, context=None):
                                 headers={"Authorization": "Bearer keyW5hCXiZZ7WEJmf"})
         jsonik = json.loads(response.content)
         temporary_list = [i['fields']['title'] for i in jsonik['records']]
-        p = Pagination(temporary_list)
-        return p.get_visible_items()
+        lc = Pagination(temporary_list)
+        return lc.get_visible_items()
     else:
-        p = Pagination(massif)
-        return p.get_visible_items()
+        lc = Pagination(massif)
+        return lc.get_visible_items()
